@@ -1,9 +1,10 @@
 import express from "express"
 import stripe from "./services/stripe"
+import cors from "cors"
 const app = express()
 const port = 3000
 
-
+app.use(cors())
 app.post("/create-customer", async (req, res) => {
     const customer = await stripe.customers.create({
         description: 'Ditin User',
