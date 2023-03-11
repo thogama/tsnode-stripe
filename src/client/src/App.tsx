@@ -1,11 +1,10 @@
 import './App.css'
-import CheckoutForm from './components/CheckoutForm'
-import Payment from './components/Payment'
+import Card from './components/Card'
 function App() {
 
   return (
     <div className="App">
-        <Payment/>
+      <Card/>
     </div>
   )
 }

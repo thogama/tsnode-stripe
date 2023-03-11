@@ -14,18 +14,17 @@ app.post("/create-customer", async (req, res) => {
 })
 
 app.post("/create-payment-intent", async (req, res) => {
-    try {
-        const paymentIntent = await stripe.paymentIntents.create({
-            currency: "brl",
-            amount: 2000,
-            automatic_payment_methods: {
-                enabled: true,
-            }
-        })
-        res.send({ clientSecret: paymentIntent.client_secret })
-    } catch (e) {
-        return res.status(400).send({ e })
-    }
+    const paymentIntent = await stripe.paymentIntents.create({
+        currency:"brl",
+        amount: 2000,
+        payment_method_types: ["card"]
+    })
+    res.json({ clientSecret: paymentIntent.client_secret })
+
+})
+
+app.get("/config", async (req, res) => {
+    res.json({ publishableKey: process.env.STRIPE_PUBLISHABLE_KEY })
 })
 
 app.listen(port, () => {
